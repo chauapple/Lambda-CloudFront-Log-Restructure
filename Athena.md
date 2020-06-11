@@ -3,13 +3,13 @@
 ## Create database
 
 ```
-create database mierucacdn
+create database DATABASENAME
 ```
 
 ## Create table
 
 ```
-CREATE EXTERNAL TABLE IF NOT EXISTS mierucacdn.cloudfront_logs (
+CREATE EXTERNAL TABLE IF NOT EXISTS DATABASENAME.cloudfront_logs (
   `date` DATE,
   time STRING,
   location STRING,
