@@ -17,32 +17,31 @@ s3://YOUR-BUCKET/structured/2020/06/11/07/ET5OCLG4OFMBJ.2020-06-11-07.d652f9cc.g
 - The function can handle multiple CloudFront distributions.
 
 ## Install / setup:
-1. Create a new blank Python 2.7 Lambda function
+1. Create a new blank Lambda function
+ - Name: CloudFront_Log_Restructure
+ - Runtime: Python 2.7
+ + Choose or create an execution role
+ - Create a new role from AWS policy templates
+ - Role name: Lambda_CloudFront_Log_Restructure
 
 2. Set up an S3 trigger
  - Bucket: Where you write your CloudFront logs
- - Event type: Object Created (All)
+ - Event type: All object create events
  - Prefix: raw/
  - Enable trigger: [true]
+ + if have error [overlapping for the same event type] then open S3 console -> Properties -> Events to delete old setup
 
-3. At the bottom of the "Configure function" page, set Role to "Create a custom role", it will open a new tab
- - Role Description: Lambda execution role permissions
- - IAM Role: Create new IAM Role
- - Role Name: Lambda_CloudFront_Log_Restructure (or whatever you want)
- - Select Allow
+3. Back on "Configure function" page: Basic settings
 
-4. Back on "Configure function" page:
-
- - Name: CloudFront-Log-Restructure
  - Description: Restructures CloudFront logs in S3 to a directory structure more useful for AWS Athena or EMR
  - Runtime: Python 2.7
- - Code entry type: Edit code inline
- - [paste entire contents of index.py to code area]
  - Handler: index.lambda_handler
- - Role: Choose an existing role
- - Existing role: Lambda_CloudFront_Log_Restructure
  - Memory (MB): 128
  - Timeout: 5 seconds
+ 
+4. Back on "Configure function" page: Function code
+ - Change name file py to index.py
+ - Replace content file
 
 5. Go into IAM and edit the newly created Role "Lambda_CloudFront_Log_Restructure"
 
